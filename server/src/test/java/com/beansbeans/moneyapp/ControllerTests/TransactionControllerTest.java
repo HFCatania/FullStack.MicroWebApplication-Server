@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
@@ -17,10 +18,11 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class TransactionControllerTest {
 
     Transaction testTransaction = new Transaction(4L,5L,6L,300.0,"this is a memo", LocalDateTime.now(), 1L);
+    Transaction testTransaction2 = new Transaction(5L,6L,7L,100.0,"this is also a memo", LocalDateTime.now(), 2L);
 
     @Mock
     private TransactionService transactionService;
@@ -73,8 +75,18 @@ public class TransactionControllerTest {
 
     @Test
     public void withdrawTest(){
-        when(transactionService.withdrawFrom(6L, 300.0)).thenReturn(true);
+        when(transactionService.withdrawFrom(5L, 300.0)).thenReturn(true);
         transactionController.withdraw(testTransaction);
+
+        verify(transactionService, times(1)).withdrawFrom(5L, 300.0);
+    }
+
+    @Test
+    public void transferTest(){
+        when(transactionService.transferFunds(6L,7L, 100.00)).thenReturn(true);
+        transactionController.transfer(testTransaction2);
+
+        verify(transactionService, times(1)).transferFunds(6L,7L,100.0);
     }
 
     private Transaction mockTransaction(){

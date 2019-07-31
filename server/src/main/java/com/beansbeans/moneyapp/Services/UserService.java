@@ -13,8 +13,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User create(User user){ 
-        return userRepository.save(user);
+    public User create(User rawUser){
+        User savedUser = new User(rawUser, ValidateUserNamePassword.makeHash(rawUser.getPasswordHash()));
+        return userRepository.save(savedUser);
     }
 
     public Iterable<User> findAll() {
@@ -25,7 +26,6 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public User show(String userName) { return userRepository.findUserByUserNameIs(userName); }
 
     public User updateUser(Long id, User newUserData){
         User originalUser = userRepository.findById(id).get();
@@ -40,8 +40,13 @@ public class UserService {
     }
 
     public User login(User user) throws SQLException{
-        User check = userRepository.findByUserNameAndPasswordHash(user.getUserName(), user.getPasswordHash());
-        if(check == null) throw new SQLException();
-        return check;
+        User foundUser = userRepository.findByUserName(user.getUserName());
+        if(foundUser == null) throw new SQLException();
+        if(ValidateUserNamePassword.confirmPasswordHash(
+                user.getPasswordHash(), foundUser.getPasswordHash())){
+            return foundUser;
+        } else {
+            throw new SQLException();
+        }
     }
 }

@@ -40,6 +40,15 @@ public class User {
         this.email = email;
     }
 
+    public User(User old, String hashedPassword){
+        this.id = old.getId();
+        this.firstName = old.getFirstName();
+        this.lastName = old.getLastName();
+        this.userName = old.getUserName();
+        this.passwordHash = hashedPassword;
+        this.email = old.getEmail();
+    }
+
     public Long getId() {
         return id;
     }
