@@ -43,6 +43,7 @@ public class TransactionService {
         Double initialBalance = account.getBalance();
         account.setBalance(initialBalance + amount);
         accountRepository.save(account);
+//        transactionRepository.save()
         return true;
     }
 
@@ -60,12 +61,13 @@ public class TransactionService {
     public Boolean transferFunds(Long fromId, Long toId, Double amount){
         Account fromAccount = accountRepository.findById(fromId).get();
         Account toAccount = accountRepository.findById(toId).get();
-        Double initalBalance = fromAccount.getBalance();
-        if((initalBalance - amount) < 0.00){
+        Double initialBalance = fromAccount.getBalance();
+        Double initialBalance2 = toAccount.getBalance();
+        if((initialBalance - amount) < 0.00){
             throw new IllegalArgumentException("Unable to complete Transaction.  Insufficient Funds");
         }
-        fromAccount.setBalance(initalBalance - amount);
-        toAccount.setBalance(initalBalance + amount);
+        fromAccount.setBalance(initialBalance - amount);
+        toAccount.setBalance(initialBalance2 + amount);
         accountRepository.save(fromAccount);
         accountRepository.save(toAccount);
         return true;

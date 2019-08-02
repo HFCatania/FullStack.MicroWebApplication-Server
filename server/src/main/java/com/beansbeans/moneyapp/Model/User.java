@@ -15,29 +15,33 @@ public class User {
     private String userName;
     private String passwordHash;
     private String email;
+    private boolean isActive;
 
 
 
     public User() {}
 
-    public User(String firstName, String lastName) {
+    public User(String firstName, String lastName, boolean isActive) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.isActive = isActive;
     }
 
-    public User(Long id, String firstName, String lastName) {
+    public User(Long id, String firstName, String lastName, boolean isActive) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.isActive = isActive;
     }
 
-    public User(Long id, String firstName, String lastName, String userName, String passwordHash, String email) {
+    public User(Long id, String firstName, String lastName, String userName, String passwordHash, String email, boolean isActive) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.passwordHash = passwordHash;
         this.email = email;
+        this.isActive = isActive;
     }
 
     public User(User old, String hashedPassword){
@@ -96,4 +100,8 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public boolean isActive() { return isActive; }
+
+    public void setActive(boolean active) { isActive = active; }
 }

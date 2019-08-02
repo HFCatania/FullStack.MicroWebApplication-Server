@@ -11,18 +11,21 @@ public class Account {
     private Double balance;
     @Column(name="userid")
     private Long userId;
+    private boolean isActive;
 
     public Account() {}
 
-    public Account(Double balance, Long userId) {
+    public Account(Double balance, Long userId, boolean isActive) {
         this.balance = balance;
         this.userId = userId;
+        this.isActive = isActive;
     }
 
-    public Account(Long id, Double balance, Long userId) {
+    public Account(Long id, Double balance, Long userId, boolean isActive) {
         this.id = id;
         this.balance = balance;
         this.userId = userId;
+        this.isActive = isActive;
     }
 
     public Long getId() {
@@ -47,6 +50,14 @@ public class Account {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     @Override
