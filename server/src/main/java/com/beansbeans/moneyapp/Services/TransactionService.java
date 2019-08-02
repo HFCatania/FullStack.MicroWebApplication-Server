@@ -72,4 +72,8 @@ public class TransactionService {
         accountRepository.save(toAccount);
         return true;
     }
+
+    public Iterable<Transaction> findAllByUserId(Long userId){
+        return transactionRepository.findAllByUserId(userId);
+    }
 }

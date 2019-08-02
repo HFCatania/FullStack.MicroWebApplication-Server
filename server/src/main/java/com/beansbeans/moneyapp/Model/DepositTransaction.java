@@ -1,67 +1,45 @@
 package com.beansbeans.moneyapp.Model;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name="transactions")
-public class Transaction {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class DepositTransaction {
     private Long transactionId;
-    @Column(name="from_id")
-    private Long fromAccountId;
-    @Column(name="to_id")
     private Long toAccountId;
     private Double amount;
     private String memo;
     private LocalDateTime localDateTime;
     private Long userId;
-    private boolean isActive;
 
-    public Transaction() { }
+    public DepositTransaction() { }
 
-    public Transaction(Long fromAccountId, Long toAccountId, Double amount, String memo, LocalDateTime localDateTime, Long userId, boolean isActive) {
-        this.fromAccountId = fromAccountId;
+    public DepositTransaction( Long toAccountId, Double amount, String memo, LocalDateTime localDateTime, Long userId) {
         this.toAccountId = toAccountId;
         this.amount = amount;
         this.memo = memo;
         this.localDateTime = localDateTime;
         this.userId = userId;
-        this.isActive = isActive;
     }
 
-    public Transaction(Long transactionId, Long fromAccountId, Long toAccountId, Double amount, String memo, LocalDateTime localDateTime, Long userId, boolean isActive) {
+    public DepositTransaction(Long transactionId, Long toAccountId, Double amount, String memo, LocalDateTime localDateTime, Long userId) {
         this.transactionId = transactionId;
-        this.fromAccountId = fromAccountId;
         this.toAccountId = toAccountId;
         this.amount = amount;
         this.memo = memo;
         this.localDateTime = localDateTime;
         this.userId = userId;
-        this.isActive = isActive;
     }
 
-    public Transaction(Long fromAccountId, Long toAccountId, Double amount, String memo, Long userId, boolean isActive){
-        this.fromAccountId = fromAccountId;
+    public DepositTransaction(Long toAccountId, Double amount, String memo, Long userId){
         this.toAccountId = toAccountId;
         this.amount = amount;
         this.memo = memo;
         this.localDateTime = LocalDateTime.now();
         this.userId = userId;
-        this.isActive = isActive;
     }
 
-    public Transaction(Long toAccountId, Double amount, boolean isActive) {
+    public DepositTransaction(Long toAccountId, Double amount) {
         this.toAccountId = toAccountId;
         this.amount = amount;
-        this.isActive = isActive;
-    }
-
-    public Transaction(Long fromAccountId, String memo, boolean isActive) {
-        this.fromAccountId = fromAccountId;
-        this.memo = memo;
-        this.isActive = isActive;
     }
 
     public Long getTransactionId() {
@@ -70,14 +48,6 @@ public class Transaction {
 
     public void setTransactionId(Long transactionId) {
         this.transactionId = transactionId;
-    }
-
-    public Long getFromAccountId() {
-        return fromAccountId;
-    }
-
-    public void setFromAccountId(Long fromAccountId) {
-        this.fromAccountId = fromAccountId;
     }
 
     public Long getToAccountId() {
@@ -115,8 +85,4 @@ public class Transaction {
     public Long getUserId(){ return userId; }
 
     public void setUserId(Long userId){ this.userId = userId; }
-
-    public boolean isActive() { return isActive; }
-
-    public void setActive(boolean active) { isActive = active; }
 }

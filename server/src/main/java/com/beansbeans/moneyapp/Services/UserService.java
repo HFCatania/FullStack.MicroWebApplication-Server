@@ -14,6 +14,15 @@ public class UserService {
     private UserRepository userRepository;
 
     public User create(User rawUser){
+        //validate username
+            //not in db
+            //pass validation class
+
+        //validate password
+            //pass validation class
+
+        //potentially validate email
+            //pass validation class (email must contain '@')
         User savedUser = new User(rawUser, ValidateUserNamePassword.makeHash(rawUser.getPasswordHash()));
         return userRepository.save(savedUser);
     }

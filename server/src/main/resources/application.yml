@@ -3,9 +3,9 @@
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://kmmwdvl9gxkn00qv:jtgxnrgznd4ikziq@z37udk8g6jiaqcbx.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ht7vcw1fdlysxgp8
-    username: kmmwdvl9gxkn00qv
-    password: jtgxnrgznd4ikziq
+    url: jdbc:mysql://localhost:3306/financialManagerAppDB
+    username: root
+    password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

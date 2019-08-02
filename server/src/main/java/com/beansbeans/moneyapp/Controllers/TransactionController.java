@@ -36,10 +36,10 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/transaction/{userId}")
-    public ResponseEntity<Transaction> findByUserId(@PathVariable Long userId){
+    @GetMapping("/transaction/user/{userId}")
+    public ResponseEntity<Iterable<Transaction>> findByUserId(@PathVariable Long userId){
         try {
-            return new ResponseEntity<>(transactionService.findTransactionByUserId(userId), HttpStatus.OK);
+            return new ResponseEntity<>(transactionService.findAllByUserId(userId), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
