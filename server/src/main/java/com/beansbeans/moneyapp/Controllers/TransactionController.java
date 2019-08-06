@@ -60,7 +60,8 @@ public class TransactionController {
        try {
            Double amount = transaction.getAmount();
            Long toAccountId = transaction.getToAccountId();
-           return new ResponseEntity<>(transactionService.depositTo(toAccountId, amount), HttpStatus.OK);
+           String memo = transaction.getMemo();
+           return new ResponseEntity<>(transactionService.depositTo(toAccountId, amount, memo), HttpStatus.OK);
        } catch (Exception e){
            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
        }
@@ -83,7 +84,8 @@ public class TransactionController {
            Long fromAccountId = transaction.getFromAccountId();
            Long toAccountId = transaction.getToAccountId();
            Double amount = transaction.getAmount();
-           return new ResponseEntity<>(transactionService.transferFunds(fromAccountId, toAccountId, amount), HttpStatus.OK);
+           String memo = transaction.getMemo();
+           return new ResponseEntity<>(transactionService.transferFunds(fromAccountId, toAccountId, amount, memo), HttpStatus.OK);
        } catch (Exception e){
            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
        }

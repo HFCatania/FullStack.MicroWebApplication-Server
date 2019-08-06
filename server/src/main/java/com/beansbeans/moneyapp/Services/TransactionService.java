@@ -39,12 +39,14 @@ public class TransactionService {
     public Transaction findTransactionByUserId(Long userId) {
         return transactionRepository.findById(userId).get(); }
 
-    public Boolean depositTo(Long id, Double amount){
+    public Boolean depositTo(Long id, Double amount, String memo){
         Account account = accountRepository.findById(id).get();
         Double initialBalance = account.getBalance();
         account.setBalance(initialBalance + amount);
         accountRepository.save(account);
-//        transactionRepository.save()
+        Transaction logTransaction = new Transaction(null, account.getId(), amount, memo,
+                LocalDateTime.now(), account.getUserId());
+        transactionRepository.save(logTransaction);
         return true;
     }
 
@@ -64,18 +66,20 @@ public class TransactionService {
         return true;
     }
 
-    public Boolean transferFunds(Long fromId, Long toId, Double amount){
+    public Boolean transferFunds(Long fromId, Long toId, Double amount, String memo){
         Account fromAccount = accountRepository.findById(fromId).get();
         Account toAccount = accountRepository.findById(toId).get();
-        Double initialBalance = fromAccount.getBalance();
-        Double initialBalance2 = toAccount.getBalance();
-        if((initialBalance - amount) < 0.00){
+        Double fromInitialBalance = fromAccount.getBalance();
+        Double toInitialBalance = toAccount.getBalance();
+        if((fromInitialBalance - amount) < 0.00){
             throw new IllegalArgumentException("Unable to complete Transaction.  Insufficient Funds");
         }
-        fromAccount.setBalance(initialBalance - amount);
-        toAccount.setBalance(initialBalance2 + amount);
+        fromAccount.setBalance(fromInitialBalance - amount);
+        toAccount.setBalance(toInitialBalance + amount);
         accountRepository.save(fromAccount);
         accountRepository.save(toAccount);
+        Transaction logTransaction = new Transaction(fromId, toId, amount, memo, LocalDateTime.now(), fromAccount.getUserId());
+        transactionRepository.save(logTransaction);
         return true;
     }
 
