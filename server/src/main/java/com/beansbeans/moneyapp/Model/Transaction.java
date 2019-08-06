@@ -17,21 +17,21 @@ public class Transaction {
     private String memo;
     private LocalDateTime localDateTime;
     private Long userId;
-    private boolean isActive;
+
 
     public Transaction() { }
 
-    public Transaction(Long fromAccountId, Long toAccountId, Double amount, String memo, LocalDateTime localDateTime, Long userId, boolean isActive) {
+    public Transaction(Long fromAccountId, Long toAccountId, Double amount, String memo, LocalDateTime localDateTime, Long userId) {
         this.fromAccountId = fromAccountId;
         this.toAccountId = toAccountId;
         this.amount = amount;
         this.memo = memo;
         this.localDateTime = localDateTime;
         this.userId = userId;
-        this.isActive = isActive;
+
     }
 
-    public Transaction(Long transactionId, Long fromAccountId, Long toAccountId, Double amount, String memo, LocalDateTime localDateTime, Long userId, boolean isActive) {
+    public Transaction(Long transactionId, Long fromAccountId, Long toAccountId, Double amount, String memo, LocalDateTime localDateTime, Long userId) {
         this.transactionId = transactionId;
         this.fromAccountId = fromAccountId;
         this.toAccountId = toAccountId;
@@ -39,29 +39,25 @@ public class Transaction {
         this.memo = memo;
         this.localDateTime = localDateTime;
         this.userId = userId;
-        this.isActive = isActive;
     }
 
-    public Transaction(Long fromAccountId, Long toAccountId, Double amount, String memo, Long userId, boolean isActive){
+    public Transaction(Long fromAccountId, Long toAccountId, Double amount, String memo, Long userId){
         this.fromAccountId = fromAccountId;
         this.toAccountId = toAccountId;
         this.amount = amount;
         this.memo = memo;
         this.localDateTime = LocalDateTime.now();
         this.userId = userId;
-        this.isActive = isActive;
     }
 
-    public Transaction(Long toAccountId, Double amount, boolean isActive) {
+    public Transaction(Long toAccountId, Double amount) {
         this.toAccountId = toAccountId;
         this.amount = amount;
-        this.isActive = isActive;
     }
 
-    public Transaction(Long fromAccountId, String memo, boolean isActive) {
+    public Transaction(Long fromAccountId, String memo) {
         this.fromAccountId = fromAccountId;
         this.memo = memo;
-        this.isActive = isActive;
     }
 
     public Long getTransactionId() {
@@ -116,7 +112,4 @@ public class Transaction {
 
     public void setUserId(Long userId){ this.userId = userId; }
 
-    public boolean isActive() { return isActive; }
-
-    public void setActive(boolean active) { isActive = active; }
 }

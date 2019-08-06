@@ -15,35 +15,35 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class AccountServiceTest {
-
-    @Mock
-    private AccountRepository mockRepository;
-
-    @InjectMocks
-    private AccountService accountService;
-
-    @Before
-    public void setup(){
-        mockRepository = mock(AccountRepository.class);
-        accountService = new AccountService(mockRepository);
-    }
-
-    @Test
-    public void createAccountTest(){
-        Long id = 5L;
-        Double balance = 100.0;
-        Long userId = 2L;
-        Account account = new Account(id, balance, userId);
-        Account expected = new Account(id, balance, userId);
-
-        when(mockRepository.findById(5L)).thenReturn(java.util.Optional.of(expected));
-
-        Account actual = null;
-        actual = accountService.create(account);
-        Assert.assertEquals(expected, actual);
-
-    }
-
+//
+//    @Mock
+//    private AccountRepository mockRepository;
+//
+//    @InjectMocks
+//    private AccountService accountService;
+//
+//    @Before
+//    public void setup(){
+//        mockRepository = mock(AccountRepository.class);
+//        accountService = new AccountService(mockRepository);
+//    }
+//
 //    @Test
-//    public void find
-}
+//    public void createAccountTest(){
+//        Long id = 5L;
+//        Double balance = 100.0;
+//        Long userId = 2L;
+//        Account account = new Account(id, balance, userId);
+//        Account expected = new Account(id, balance, userId);
+//
+//        when(mockRepository.findById(5L)).thenReturn(java.util.Optional.of(expected));
+//
+//        Account actual = null;
+//        actual = accountService.create(account);
+//        Assert.assertEquals(expected, actual);
+//
+    }
+//
+////    @Test
+////    public void find
+//}
