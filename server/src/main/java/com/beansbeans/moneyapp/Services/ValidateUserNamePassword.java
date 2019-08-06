@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
         public ValidateUserNamePassword() {
         }
 
-        public Boolean isUserNameValid(String inputName) {
+        public static Boolean isUserNameValid(String inputName) {
             return ((between8And20Characters(inputName)) &&
                     (containsUpperCaseAndLowerCase(inputName)) &&
                     (containsNumeric(inputName)) &&
@@ -25,7 +25,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
                     (doesNotContainSpace(inputName)));
         }
 
-        public Boolean isPasswordValid(String inputName) {
+        public static Boolean isPasswordValid(String inputName) {
             return ((between8And20Characters(inputName)) &&
                     (containsUpperCaseAndLowerCase(inputName)) &&
                     (containsNumeric(inputName)) &&
@@ -47,21 +47,21 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
             return (BCrypt.checkpw(passWord, hash));
         }
 
-        public Boolean between8And20Characters(String inputName) {
+        public static Boolean between8And20Characters(String inputName) {
             if ((inputName.length() > 7) && (inputName.length() < 21)) {
                 return true;
             }
             return false;
         }
 
-        public Boolean containsUpperCaseAndLowerCase(String inputName) {
+        public static Boolean containsUpperCaseAndLowerCase(String inputName) {
             if ((inputName.equals(inputName.toLowerCase())) || (inputName.equals(inputName.toUpperCase()))) {
                 return false;
             }
             return true;
         }
 
-        public Boolean doesNotContainSpecialCharacters(String inputName) {
+        public static Boolean doesNotContainSpecialCharacters(String inputName) {
 
             //Checks at least one char is not alpha numeric
             if (inputName.matches("[=;:*/\\+()^\\[\\]{}|,]*")) {
@@ -70,7 +70,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
             return true;
         }
 
-        public Boolean doesNotContainTriple(String inputName) {
+        public static Boolean doesNotContainTriple(String inputName) {
             final String ps2 = ".*(?:([a-z0-9])\\1{2,}).*";
             final Pattern p2 = Pattern.compile(ps2);
             final Matcher m2 = p2.matcher(inputName);
@@ -80,21 +80,21 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
             return true;
         }
 
-        public Boolean containsNumeric(String inputName) {
+        public static Boolean containsNumeric(String inputName) {
             if (!inputName.matches(".*[0-9].*")) {
                 return false;
             }
             return true;
         }
 
-        public Boolean containsNonAlphaNumeric(String inputName) {
+        public static Boolean containsNonAlphaNumeric(String inputName) {
             if (inputName.matches("[A-Za-z0-9 ]*")) {
                 return false;
             }
             return true;
         }
 
-        public Boolean doesNotContainNotAndAnd(String inputName) {
+        public static Boolean doesNotContainNotAndAnd(String inputName) {
             inputName.toUpperCase();
             if ((inputName.contains("AND")) || (inputName.contains("NOT"))) {
                 return false;
@@ -102,14 +102,19 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
             return true;
         }
 
-        public Boolean doesNotContainSpace(String inputName) {
+        public static Boolean doesNotContainSpace(String inputName) {
             if (inputName.contains(" ")) {
                 return false;
             }
             return true;
         }
 
-
+        public static Boolean isEmailValid(String emailAddress) {
+            String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(emailAddress);
+            return matcher.matches();
+    }
 
     }
 

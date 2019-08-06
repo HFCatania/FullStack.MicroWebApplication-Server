@@ -66,12 +66,12 @@ public class TransactionController {
        }
     }
 
-    @PostMapping("/transaction/withdraw/{fromAccountId}")
+    @PostMapping("/transaction/withdraw")
     public ResponseEntity<Boolean> withdraw(@RequestBody Transaction transaction){
         try {
-            Double amount = transaction.getAmount();
-            Long fromAccountId = transaction.getFromAccountId();
-            return new ResponseEntity<>(transactionService.withdrawFrom(fromAccountId, amount), HttpStatus.OK);
+            //Double amount = transaction.getAmount();
+            //Long fromAccountId = transaction.getFromAccountId();
+            return new ResponseEntity<>(transactionService.withdrawFrom(transaction), HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }

@@ -13,16 +13,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User create(User rawUser){
-        //validate username
-            //not in db
-            //pass validation class
-
-        //validate password
-            //pass validation class
-
-        //potentially validate email
-            //pass validation class (email must contain '@')
+    public User create(User rawUser) throws SQLException {
+        User foundUser = userRepository.findByUserName(rawUser.getUserName());
+        if (foundUser != null) throw new SQLException();
+        if (!ValidateUserNamePassword.isUserNameValid(rawUser.getUserName()))  throw new SQLException();
+        if (!ValidateUserNamePassword.isPasswordValid(rawUser.getPasswordHash()))  throw new SQLException();
+        if (!ValidateUserNamePassword.isEmailValid(rawUser.getEmail()))  throw new SQLException();
         User savedUser = new User(rawUser, ValidateUserNamePassword.makeHash(rawUser.getPasswordHash()));
         return userRepository.save(savedUser);
     }
@@ -34,7 +30,6 @@ public class UserService {
     public User show(Long id){
         return userRepository.findById(id).get();
     }
-
 
     public User updateUser(Long id, User newUserData){
         User originalUser = userRepository.findById(id).get();

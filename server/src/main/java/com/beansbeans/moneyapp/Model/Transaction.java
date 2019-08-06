@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Table(name="transactions")
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long transactionId;
     @Column(name="from_id")
     private Long fromAccountId;
@@ -44,6 +44,14 @@ public class Transaction {
     public Transaction(Long fromAccountId, Long toAccountId, Double amount, String memo, Long userId){
         this.fromAccountId = fromAccountId;
         this.toAccountId = toAccountId;
+        this.amount = amount;
+        this.memo = memo;
+        this.localDateTime = LocalDateTime.now();
+        this.userId = userId;
+    }
+
+    public Transaction(Long fromAccountId, Double amount, String memo, Long userId){
+        this.fromAccountId = fromAccountId;
         this.amount = amount;
         this.memo = memo;
         this.localDateTime = LocalDateTime.now();
