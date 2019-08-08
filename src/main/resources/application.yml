@@ -3,7 +3,7 @@
 spring:
   profiles: dev
   datasource:
-    url: jdbc: mysql://t4qxib9m0dt14u23:tycgkzsyds9ael9p@c584md9egjnm02sk.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/frh5i7p1imbt5ggv
+    url: jdbc:mysql://t4qxib9m0dt14u23:tycgkzsyds9ael9p@c584md9egjnm02sk.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/frh5i7p1imbt5ggv
     username: t4qxib9m0dt14u23
     password: tycgkzsyds9ael9p
     driver-class-name: com.mysql.cj.jdbc.Driver
